@@ -219,6 +219,11 @@ specified in ".profile".
 In case the list of functions is empty qgis cannot find the
 "ITK\_AUTOLOAD\_PATH" in the same file. Also try if
 it works from the python interpreter in a terminal. 
+For the Orfeo Toolbox to work in the processing plugin shipped with QGIS
+check the paths defined here point to the right directory:
+$Processing \rightarrow Options \rightarrow Providers$
+"OTB applications folder" should be similar to "/home/user/OTB-5.10.1-Linux64/lib/python" and "OTB command line tools folder" similar to "/home/sysop/OTB-5.10.1-Linux64/bin" if not click on the right side of the window next to the variable name and adjust it accordingly.
+
 In the worst case there is a python script called
 "run\_as\_script.py" which allows to run the classification
 using the parameters specified in the "config.ini" in the repository.
