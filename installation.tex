@@ -179,7 +179,7 @@ also the plugin "Rectangles ovals digitizing" a nice tool to digitize
 regular shapes, e.g., for defining rectangular regions of interest.
 
 For the satellite analysis we will use a plugin developed at GFZ
-called REM\_SatEx it is available from our github repository.
+called \verb|REM_SatEx| it is available from our github repository.
 Open a terminal, clone the plugin, install python sphinx and
 pyqt4 developer tools and deploy the plugin:
 \begin{minted}{bash}
@@ -217,7 +217,7 @@ os.environ['PYTHONPATH']
 this should contain the "PYTHONPATH" directory previously 
 specified in ".profile".
 In case the list of functions is empty qgis cannot find the
-"ITK\_AUTOLOAD\_PATH" in the same file. Also try if
+\verb|"ITK_AUTOLOAD_PATH"| in the same file. Also try if
 it works from the python interpreter in a terminal. 
 For the Orfeo Toolbox to work in the processing plugin shipped with QGIS
 check the paths defined here point to the right directory:
@@ -225,7 +225,7 @@ $Processing \rightarrow Options \rightarrow Providers$
 "OTB applications folder" should be similar to "/home/user/OTB-5.10.1-Linux64/lib/python" and "OTB command line tools folder" similar to "/home/sysop/OTB-5.10.1-Linux64/bin" if not click on the right side of the window next to the variable name and adjust it accordingly.
 
 In the worst case there is a python script called
-"run\_as\_script.py" which allows to run the classification
+\verb|"run_as_script.py"| which allows to run the classification
 using the parameters specified in the "config.ini" in the repository.
  
 Finally activate the plugin by opening again the "Manage and Install Plugins" from the "Plugins" dropdown menu and typing "GFZ". Tick the
@@ -273,7 +273,7 @@ and leave psql afterwards:
 
 Open as root the postgres configuration file:
 \begin{minted}{bash}
-sudo gedit /etc/postgresql/9.5/main/pg\_hba.conf
+sudo gedit /etc/postgresql/9.5/main/pg_hba.conf
 \end{minted}
 Change "peer" to "md5" in the line (around 85):
 \begin{minted}{bash}
@@ -383,7 +383,7 @@ sudo pip install matplotlib
 \section{PART B. Installation of an RRVS server}
 
 This part describes the installation of a RRVS server hosting
-the REM\_RRVS tool and its Google powered pendant GRVS.
+the \verb|REM_RRVS| tool and its Google powered pendant GRVS.
 
 \subsection{Before the installation}
 
@@ -427,7 +427,7 @@ PostgreSQL and PostGIS installation on your machine.
 %In the column "Command" should be one similar to this:
 %\begin{minted}{bash}
 %/usr/lib/postgresql/9.5/bin/postgres -D /var/lib/postgresql/9.5/main 
-%-c config\_file=/etc/postgresql/9.5/main/postgresql.conf
+%-c config_file=/etc/postgresql/9.5/main/postgresql.conf
 %\end{minted}
 %If you cannot see the full command mark the line (arrow key up or down)
 % and scroll to the right (arrow key right). The "-D" indicates the 
@@ -436,12 +436,12 @@ PostgreSQL and PostGIS installation on your machine.
 
 Get the schema for the database from github and clone it to your home directory:
 \begin{minted}{bash}
-git clone git://github.com/GFZ-Centre-for-Early-Warning/REM\_DBschema ~/REM\_DBschema
+git clone git://github.com/GFZ-Centre-for-Early-Warning/REM_DBschema ~/REM_DBschema
 \end{minted}
 
 Go to the directory and connect to the database cluster using psql (providing the new password):
 \begin{minted}{bash}
-cd ~/REM\_DBschema
+cd ~/REM_DBschema
 psql --u postgres
 \end{minted}
 
@@ -452,7 +452,7 @@ in the cloned directory:
 \begin{minted}{bash}
 CREATE DATABASE rem;
 \c rem
-\i create\_templatedb.sql
+\i create_templatedb.sql
 \end{minted}
 Monitor the output printed in your shell there should be no errors
 (only short commands) printed while the script is running.
@@ -485,9 +485,9 @@ Listen 80
             Order allow,deny  
             Allow from all  
         </Directory>  
-        ErrorLog ${APACHE\_LOG\_DIR}/error.log  
+        ErrorLog ${APACHE_LOG_DIR}/error.log  
         LogLevel warn  
-        CustomLog ${APACHE\_LOG\_DIR}/access.log combined  
+        CustomLog ${APACHE_LOG_DIR}/access.log combined  
 	
 	Alias /pano /data/pano                           
 	<Directory /data/pano/>       
@@ -533,7 +533,7 @@ and clone the repository there in a directory called rrvs
 (note that only root has write permissions there):
 \begin{minted}{bash}
 cd /var/www/html
-sudo git clone git://github.com/GFZ-Centre-for-Early-Warning/REM\_RRVS ./rrvs
+sudo git clone git://github.com/GFZ-Centre-for-Early-Warning/REM_RRVS ./rrvs
 cd rrvs
 \end{minted}
 
@@ -546,17 +546,17 @@ sudo pip install -r python_requirements.txt
 
 Now we have to adjust the configuration of the application:
 \begin{minted}{bash}
-sudo cp rrvs\_config.py.example rrvs\_config.py
-sudo gedit rrvs\_config.py
+sudo cp rrvs_config.py.example rrvs_config.py
+sudo gedit rrvs_config.py
 \end{minted}
 
 In the configuration file adjust the following lines:
 
 \begin{minted}{bash}
-old: SQLALCHEMY\_DATABASE\_URI = 'postgresql://user:pw@localhost:5432/rem'
+old: SQLALCHEMY_DATABASE_URI = 'postgresql://user:pw@localhost:5432/rem'
 new: put the postgres username instead of "user" probably "postgres" 
      and for "pw" the "password" you set before
-old: SECRET\_KEY = '42'
+old: SECRET_KEY = '42'
 new: Set a strong key here, 
      best is to generate a random alphanumeric string
 old: DEBUG = True
@@ -588,7 +588,7 @@ From within psql, connect to the rem database and run the extension
 script:
 \begin{minted}{bash}
 \c rem;
-\i extend\_rem\_db.sql;
+\i extend_rem_db.sql;
 \q
 \end{minted}
 Again monitor the output for error messages.
@@ -640,8 +640,8 @@ INSERT INTO users.users(id, authenticated, name) VALUES (1, TRUE, 'Test1');
 INSERT INTO users.users(id, authenticated, name) VALUES (2, TRUE, 'Test2');
 
 INSERT INTO users.roles(id, name) VALUES (1, 'public');
-INSERT INTO users.roles\_users(user\_id, role\_id) VALUES (1, 1);
-INSERT INTO users.roles\_users(user\_id, role\_id) VALUES (2, 1);
+INSERT INTO users.roles_users(user_id, role_id) VALUES (1, 1);
+INSERT INTO users.roles_users(user_id, role_id) VALUES (2, 1);
 \end{minted}
 
 
@@ -653,6 +653,38 @@ server for error messages:
 
 \begin{minted}{bash}
 sudo gedit /var/log/apache2/error.log
+\end{minted}
+
+\subsubsection{Add a translation to another language}
+In order to translate the RRVS system to another language 
+there are two things to consider. 
+The first is adding a description in the \verb|taxonomy.dic_attribute_value| table in the database.
+There is a script \verb|add_language_tax_.py|
+given a csv with the attribute code and the translation (see example translation.csv in the scripts directory)
+this script adds a column with the description to the table in the database.
+In order for the app to find the translation several changes have to be made in the code.
+\begin{itemize}
+    \item in \verb|webapp/__init__.py| add the iso code for the language to the list vor the variable "lang" (around line 39)
+    \item in webapp/model.py add the new column in the database table (around line 93)
+    \item in webapp/forms.py add a RRVSForm class for the language (NOTE: this and the following points will be fixed in a later version of the RRVS)
+    \item in webapp/views.py add the new RRVSForm class to the import statement (line 14)
+    \item in webapp/views.py add the new RRVSForm class to the import statement (line 14)
+    \item in webapp/views.py add an "elif" for the new language and the RRVSForm class
+\end{itemize}
+
+The second part is to add a translation for the html textblocks. We use Flask-Babel to render the html
+text in the preferred browser language.
+First open the \verb|rrvs_config.py| file and add the new language to the LANGUAGES dictionary.
+Then run pybabel to add the new language:
+\begin{minted}{bash}
+ pybabel extract -F babel.cfg -k lazy_gettext -o messages.pot webapp
+ pybabel update -i messages.pot -d webapp/translations
+\end{minted}
+This adds a new  messages.po file containing the translations for the language.
+Using for example poedit you can provide the translations (here an example for the
+already added Spanish 'es')
+\begin{minted}{bash}
+poedit webapp/translations/es/LC_MESSAGES/messages.po
 \end{minted}
 
 \subsection{GRVS}
@@ -671,7 +703,7 @@ Get the RRVS code repository and checkout the "grvs" branch
 
 \begin{minted}{bash}
 cd /var/www/html
-sudo git clone git://github.com/GFZ-Centre-for-Early-Warning/REM\_RRVS ./grvs
+sudo git clone git://github.com/GFZ-Centre-for-Early-Warning/REM_RRVS ./grvs
 cd grvs
 sudo git checkout grvs
 \end{minted}
